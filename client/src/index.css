@@ -1,0 +1,12 @@
+body {
+  background-color: rgba(0, 128, 0, 0.308);
+  margin: 0;
+  padding: 0;
+ 
+  background-size: cover;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
