@@ -7,6 +7,7 @@ import s from "../styles/addpost.module.scss";
 export const AddPost = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const dispatch = useDispatch();
 
@@ -17,6 +18,7 @@ export const AddPost = () => {
       const data = new FormData();
       data.append("title", title);
       data.append("text", text);
+      data.append("description", description);
       data.append("image", image);
       dispatch(createPost(data));
       navigate("/posts");
@@ -41,6 +43,15 @@ export const AddPost = () => {
           className={s.input}
           value={text}
           onChange={(e) => setText(e.target.value)}
+        />
+      </label>
+      <label className={s.label}>
+        Описание:
+        <textarea
+          type="text"
+          className={s.inputDes}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </label>
       <label className={s.labelAdd}>
