@@ -21,6 +21,7 @@ export const AddPost = () => {
       data.append("description", description);
       data.append("image", image);
       dispatch(createPost(data));
+      console.log(data)
       navigate("/posts");
     } catch (error) {}
   };

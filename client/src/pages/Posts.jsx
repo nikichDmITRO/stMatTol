@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { PostIt } from "../components/PostItem/PostItem";
 
 import { getAllPosts } from "../redux/slices/post/postSlice";

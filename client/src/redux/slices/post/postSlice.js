@@ -11,6 +11,7 @@ export const createPost = createAsyncThunk(
   async (params) => {
     try {
       const { data } = await axios.post("/post", params);
+      console.log(data)
       return data;
     } catch (error) {
       console.log(error);
@@ -19,18 +20,32 @@ export const createPost = createAsyncThunk(
 );
 export const deletePost = createAsyncThunk("post/deletePost", async (id) => {
   try {
-    console.log(id);
     const { data } = await axios.delete(`/post/${id}`, id);
     return data;
   } catch (error) {
     console.log(error);
   }
 });
+export const updatePost = createAsyncThunk(
+  "post/updatePost",
+  async (params) => {
+    try {
+      console.log(params)
+      const { data } = await axios.put(`/post/${params.id}`, params);
+    console.log(data)
+     
+      return data;
+     
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 export const getAllPosts = createAsyncThunk("post/getAllPosts", async () => {
   try {
     const { data } = await axios.get("/post");
-    console.log(data);
+
     return data;
   } catch (error) {
     console.log(error);
@@ -73,6 +88,21 @@ export const postSlice = createSlice({
       );
     },
     [deletePost.rejected]: (state) => {
+      state.loading = false;
+    },
+    [updatePost.pending]: (state) => {
+      state.loading = true;
+    },
+    [updatePost.fulfilled]: (state, action) => {
+      state.loading = false;
+
+      const index = state.posts.findIndex(
+        (post) => post._id === action.payload._id
+      );
+      state.posts[index] = action.payload;
+     
+    },
+    [updatePost.rejected]: (state) => {
       state.loading = false;
     },
   },
